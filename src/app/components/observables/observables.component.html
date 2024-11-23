@@ -1,0 +1,50 @@
+<div>
+  <span>
+    <strong>Método initObservable:</strong>
+    <br><br>
+    Este método cria um novo Observable:
+    <ul>
+      <li>O Observable é criado usando a classe Observable do RxJS.</li>
+      <li>O Observable recebe uma função que aceita um parâmetro <code>subscriber_param</code>. Este parâmetro é usado para emitir valores para os observadores inscritos.</li>
+    </ul>
+
+    <strong>Emissão de valores estatico:</strong>
+    <ul>
+      <li><code>subscriber_param.next(10)</code>: Emite o valor 10.</li>
+      <li><code>subscriber_param.next('Bruno')</code>: Emite a string 'Bruno'.</li>
+      <li><code>subscriber_param.next(true)</code>: Emite o valor booleano true.</li>
+      <li><code>subscriber_param.next({{ '{' }} name: 'Bruno', age: 36 {{ '}' }})</code>: Emite um objeto com as propriedades <code>name</code> e <code>age</code>.</li>
+      <li><code>subscriber_param.next({{ '[' }}1, 2, 3, 4{{ ']' }})</code>: Emite um array de numeros.</li>
+      <li><code>subscriber_param.complete()</code>: Indica que o Observable completou e não emitirá mais valores.</li>
+    </ul>
+
+    <strong>Emissão de valores Dinâmicos:</strong>
+    <ul>
+      <li><code>subscriber_param.next(values)</code>: Emite os valores dos formulários.</li>
+      <li><code>subscriber_param.complete()</code>: Indica que o Observable completou e não emitirá mais valores.</li>
+    </ul>
+    <ul>
+      <form [formGroup]="formGroup" (ngSubmit)="submitForm()">
+        <li>Digite os valores:</li>
+        <li><label>Digite apenas 1 Numero</label><input type="number" id="numberInput" formControlName="numberInput" required></li>
+        <li><label>Digite apenas 1 Texto</label><input type="text" id="stringInput" formControlName="stringInput" required></li>
+        <li><label>Selecione a caixa valor sera True</label><input type="checkbox" id="booleanInput" formControlName="booleanInput"></li>
+        <li><button type="submit">Submit</button></li>
+      </form>
+      <h5>Valores Submetidos:</h5>
+      <pre>{{ submittedValues | json }}</pre>
+    </ul>
+
+    <strong>Inscrição no Observable:</strong>
+    <ul>
+      <li><code>observable.subscribe(...)</code>: Inscreve-se no Observable para receber os valores emitidos.</li>
+      <li>O método <code>subscribe</code> aceita três funções de callback:
+        <ul>
+          <li><code>(res) => {{ '{' }} console.log(res); {{ '}' }}</code>: Chamada sempre que um novo valor é emitido. O valor é registrado no console.</li>
+          <li><code>(err) => {{ '{' }} console.log(err); {{ '}' }}</code>: Chamada se ocorrer um erro. O erro é registrado no console.</li>
+          <li><code>() => {{ '{' }} console.log('compleat the OBSERVABLE'); {{ '}' }}</code>: Chamada quando o Observable completa. A mensagem 'compleat the OBSERVABLE' é registrada no console.</li>
+        </ul>
+      </li>
+    </ul>
+  </span>
+</div>
