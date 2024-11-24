@@ -46,5 +46,18 @@
         </ul>
       </li>
     </ul>
+    <strong>Subscription do Observable:</strong>
+    <ul>
+      <li><code>const subscription = observable.subscribe(...)</code>: Para se desinscrever declare o subscribe a uma variavel.</li>
+      <li>O método <code>subscription</code> deve ser chamado para se desinscrever do Observable:
+        <ul>
+          <li><code>subscription.unsubscribe()</code>: Desinscreve-se do Observable.</li>
+          <h5>Valores infinito com o unsubscribe defina os segundos para se desinscrever:</h5>
+          <input type="number" id="timeSeconds" [(ngModel)]="timeSeconds" min="1">
+          <button (click)="exemploInterval()">Iniciar Intervalo até atingir o unsubscribe</button>
+            <pre>{{ valor }}</pre>
+        </ul>
+      </li>
+    </ul>
   </span>
 </div>
