@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { interval, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-observables',
@@ -14,6 +14,8 @@ export class ObservablesComponent implements OnInit {
   formGroup: FormGroup<any> = new FormGroup({});
   @ViewChild('form') formElement!: ElementRef;
   submittedValues: any = {};
+  valor: number = 0;
+  timeSeconds: number = 5;
 
   constructor(private fb: FormBuilder) {}
 
@@ -40,7 +42,7 @@ export class ObservablesComponent implements OnInit {
       subscriber_param.complete();
     });
 
-    observable.subscribe(
+    const subscription = observable.subscribe(
       (res) => {
         console.log(res);
       },
@@ -51,6 +53,7 @@ export class ObservablesComponent implements OnInit {
         console.log('compleat the OBSERVABLE');
       }
     );
+    subscription.unsubscribe();
   }
 
   submitForm() {
@@ -67,10 +70,23 @@ export class ObservablesComponent implements OnInit {
       form_params.complete();
     });
 
-    observableForms.subscribe(
+    const subscriptionForms = observableForms.subscribe(
       (respostaForms) => { console.log(respostaForms); },
       (error) => { console.error(error); },
       () => { console.log('compleat the OBSERVABLE FORMS'); }
     );
+
+    subscriptionForms.unsubscribe();
+
+  }
+
+  exemploInterval(){
+    const intervalExemple = interval(1000);
+    const subscriptionInterval = intervalExemple.subscribe(() =>{
+      this.valor++;
+    });
+    setTimeout(() => {
+      subscriptionInterval.unsubscribe();
+    }, this.timeSeconds * 1000);
   }
 }
